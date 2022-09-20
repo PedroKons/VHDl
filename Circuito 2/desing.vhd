@@ -1,20 +1,22 @@
-
---Implemente um circuito demultiplexador 1-para-2 com canal de
---dados de 1 bit e o seu testbench.
-
-
+-- Code your design here
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity demux2_1bit is
-port( i_SEL : in std_logic; --selector
-      i_A : in std_logic;-- data input
-      o_R : out std_logic;-- data output
-      o_S : out std_logic);-- data output
-end demux2_1bit;
+--Implemente um circuito codificador binário de 2 bits para one-hot
+--(https://en.wikipedia.org/wiki/One-hot) de 4 bits e o seu testbench.
 
-architecture arch_1 of demux2_1bit is
+entity one2_4hot is
+port (i_A  : in std_logic; 
+      i_B  : in std_logic;
+      o_S  : out std_logic_vector ( 3 downto 0 ));
+end one2_4hot;
+
+architecture arch_1 of one2_4hot is 
 begin
-  o_R <= (i_A and not i_SEL);-- 
-  o_S <= (i_A and i_SEL);
-end arch_1;
+
+  o_S(0) <= (not i_A and not i_B);
+  o_S(1) <= (not i_A and i_B);
+  o_S(2) <= (i_A and not i_B);
+  o_S(3) <= (i_A and i_B);
+  
+  end arch_1;
